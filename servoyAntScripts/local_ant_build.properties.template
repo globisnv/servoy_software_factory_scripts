@@ -28,7 +28,7 @@ solutions_to_deploy                 = solution1
 e2e.tomcat.start_stop.tools.tomcat  = yep
 e2e.tomcat.java.home                = [point_to_a_JDK_dir_that_should_be_used_when_starting_e2e_tomcat]
 
-#alternate_project_locations.on=yep
+#alternate_project_locations.on      = yep
 #servoy.properties.dir               = ${workspace.solutions.dir}/build_files/servoy_properties_files
 #e2e.scripts.dir                     = ${workspace.solutions.dir}/build_files/e2e_test_scripts
 
