@@ -13,7 +13,7 @@
         <prepare_export_logs destSubdir="e2e"/>
         <fail-if-export-failed/>
     </target>
-    
+
     <target name="export_wars_for_deploy" depends="clean_deploy_exports" if="build.deploy">
         <trycatch>
             <try>
@@ -36,7 +36,7 @@
                 <prepare_export_logs destSubdir="unit_smart"/>
                 <fail-if-export-failed/>
             </then>
-        </if>        
+        </if>
     </target>
 
     <!-- export .servoy for running jsunit tests on import (smart) client-->
@@ -53,7 +53,7 @@
                 <prepare_export_logs destSubdir="unit_smart"/>
                 <fail-if-export-failed/>
             </then>
-        </if>        
+        </if>
     </target>
 
     <!-- export .servoy for running jsunit tests on import (mobile) client-->
@@ -67,9 +67,9 @@
                 <prepare_export_logs destSubdir="unit_mobile"/>
                 <fail-if-export-failed/>
             </then>
-        </if>        
+        </if>
     </target>
-    
+
     <target name="rmme_73" unless="servoy.install.lower.then.7.3">
         <if>
             <isset property="build.run.mobile.unit.tests"/>
@@ -78,9 +78,9 @@
                 <export-solution-as-dot-servoy solutionNames="${mobile_to_deploy_services}" outputDir="${mobile.deploy.s.dir}"/>
                 <export-mobile-solution solutionNames="${mobile_to_deploy}" production="-production" outputDir="${mobile.deploy.w.dir}"/>
             </then>
-        </if>        
+        </if>
     </target>
-    
+
     <target name="rmme_lower" if="servoy.install.lower.then.7.3">
         <if>
             <isset property="build.run.mobile.unit.tests"/>
@@ -97,9 +97,9 @@
                   </sequential>
                 </for>
             </then>
-        </if>        
+        </if>
     </target>
-    
+
     <target name="emcs_lower" if="servoy.install.lower.then.7.3">
         <!-- for pre 7.3 we either need to iterate and execute 1 by 1 -->
         <if>
@@ -118,9 +118,9 @@
                 <prepare_export_logs destSubdir="unit_mobile"/>
                 <fail-if-export-failed/>
             </then>
-        </if>        
+        </if>
     </target>
-    
+
     <!-- this macro is almost identical to the sample export solution target from [developer.dir]/exporter -->
     <macrodef name="export-solution-as-dot-servoy">
         <attribute name="solutionNames"/>
@@ -137,7 +137,7 @@
                     resultproperty="export.result"
                     fork="true">
                 <jvmarg value="-Xms40m" />
-                <jvmarg value="-Xmx512m" />
+                <jvmarg value="-Xmx4G" />
                 <jvmarg value="-XX:MaxPermSize=256M" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
 
@@ -216,7 +216,7 @@
             <check-exporter-exit-code/>
         </sequential>
     </macrodef>
-        
+
     <macrodef name="export-solutions-as-war">
         <attribute name="solutionNames"/>
         <attribute name="outputDir"/>
@@ -233,7 +233,7 @@
             <echo level="info" message="Using equinox launcher   jar: ${equinox.launcher.jar.location_property}" />
             <echo level="info" message="Using pluginLocations    dir: ${servoy.developer.dir}/plugins/" />
             <echo level="info" message="Using workspace          dir: ${workspace.solutions.dir}" />
-            
+
             <var name="export.result" unset="true"/>
             <java   classname="org.eclipse.equinox.launcher.Main"
                     classpathref="equinox.launcher.jar.location"
@@ -267,7 +267,7 @@
                 <arg value="-i18n" />
                 <arg value="-pfw" /> <!-- SVY-9645 is to implement this -pfw option; until then the -p will be put in the war as well -->
                 <arg value="@{propertiesFileForWar}" />
-                
+
                 <!-- add here any of the optional arguments supported by the exporter; see 'export -help' for more info; for example: -->
                 <!--<arg value="-help" />-->
                 <arg value="-verbose" />
@@ -276,7 +276,7 @@
             <check-exporter-exit-code/>
         </sequential>
     </macrodef>
-    
+
     <macrodef name="check-exporter-exit-code">
         <sequential>
             <var name="export.failed" unset="true"/>
@@ -287,7 +287,7 @@
             </condition>
         </sequential>
     </macrodef>
-    
+
     <macrodef name="fail-if-export-failed">
         <sequential>
             <fail message="Exports failed: please check the exporter log files." if="export.failed" />
@@ -313,12 +313,12 @@
         <mkdir dir="${passed.exports.dir}" />
         <mkdir dir="${passed.mc.exports.dir}" />
         <mkdir dir="${passed.sc.exports.dir}" />
-        
+
         <antcall target="clean_passed_exports_if_needed"/>
-        
+
         <delete failonerror="false" file="${workspace.solutions.dir}/.metadata/.log" />
         <delete failonerror="false" file="${antScripts.dir}/servoy_log.txt" />
-        
+
         <!-- delete any temporary junit files that get left behind sometimes -->
         <delete includeemptydirs="true" quiet="true">
             <fileset dir="${antScripts.dir}" includes="junit*.properties" />
@@ -330,7 +330,7 @@
         <make-clean-dir dir="${passed.mc.exports.dir}"/>
         <make-clean-dir dir="${passed.sc.exports.dir}"/>
     </target>
-    
+
     <macrodef name="prepare_export_logs">
         <attribute name="destSubdir"/>
         <sequential>
