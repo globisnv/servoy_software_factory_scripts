@@ -137,7 +137,7 @@
                     resultproperty="export.result"
                     fork="true">
                 <jvmarg value="-Xms40m" />
-                <jvmarg value="-Xmx4G" />
+                <jvmarg value="-Xmx2G" />
                 <jvmarg value="-XX:MaxPermSize=256M" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
 
