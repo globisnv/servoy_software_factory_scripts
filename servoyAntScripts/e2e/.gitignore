@@ -2,3 +2,4 @@ node_modules
 
 /protractor.config.js
 /selenese.properties
+/package-lock.json
