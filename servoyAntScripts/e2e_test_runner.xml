@@ -26,6 +26,7 @@
             <filterset>
                 <filter token="{sauceUserPlaceholder}"                   value="${sauce.labs.user}"/>
                 <filter token="{sauceKeyPlaceholder}"                    value="${sauce.labs.token}"/>
+                <filter token="{sauceRegionPlaceholder}"                 value="${sauce.labs.region}"/>
                 <filter token="{e2e.results.dir}"                        value="${absolute.path.e2e.results.dir}"/>
                 <filter token="{e2e.protractor.tests.dir}"               value="${absolute.path.e2e.scripts.dir}"/>
                 <filter token="{e2e.tomcat.base.url}"                    value="${e2e.tomcat.base.url}"/>
@@ -36,6 +37,7 @@
             <filterset>
                 <filter token="{sauceUserPlaceholder}"                   value="${sauce.labs.user}"/>
                 <filter token="{sauceKeyPlaceholder}"                    value="${sauce.labs.token}"/>
+                <filter token="{sauceRegionPlaceholder}"                 value="${sauce.labs.region}"/>
                 <filter token="{e2e.results.dir}"                        value="${absolute.path.e2e.results.dir}"/>
                 <filter token="{e2e.tomcat.base.url}"                    value="${e2e.tomcat.base.url}"/>
             </filterset>
