@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "protractor": "6.0.0",
+    "protractor": "5.4.2",
     "jasmine-reporters": "2.3.2",
     "selenium-server": "3.141.59",
     "chromedriver": "2.46.0"
