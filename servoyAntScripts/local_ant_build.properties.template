@@ -37,7 +37,8 @@ e2e.browser.type                    = local
 
 #sauce.labs.user                     = [your Sauce Labs user here]
 #sauce.labs.token                    = [access token goes here]
-#sauce.labs.selenium.url             = http://${sauce.labs.user}:${sauce.labs.token}@localhost:${SAUCE_ONDEMAND_PORT}/wd/hub
+#sauce.labs.region                   = [us (for United States) or eu (for Europe)]
+#sauce.labs.selenium.url             = http://${sauce.labs.user}:${sauce.labs.token}@localhost:${SELENIUM_PORT}/wd/hub
 # define a timeout for sauce labs to not require additional Selenium commands for a solution (set to 1.5 min; should be updated for how long your test can possibly take to run, but not much higher)
 #sauce.labs.selenium.idle-timeout    = 90
 
