@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 
 <!-- Works with Ant 1.7.0 and higher -->
-<project default="main" basedir=".">
+<project default="main" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
 
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
       <classpath>
         <pathelement location="./ant-contrib/ant-contrib-1.0b3.jar"/>
       </classpath>
+    </taskdef>
+
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="./jacoco-0.8.4/lib/jacocoant.jar"/>
     </taskdef>
 
     <import file="exporter.xml"/>
