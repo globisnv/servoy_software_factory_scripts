@@ -5,10 +5,14 @@
 
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
       <classpath>
-        <pathelement location="${ant_contrib.jar.location}"/>
+        <pathelement location="./ant-contrib/ant-contrib-1.0b3.jar"/>
       </classpath>
     </taskdef>
-        
+
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="./jacoco-0.8.4/lib/jacocoant.jar"/>
+    </taskdef>
+
     <import file="exporter.xml"/>
     <import file="unit_test_runner.xml"/>
     <import file="e2e_test_runner.xml"/>
@@ -32,7 +36,7 @@
     <!-- 5. Run ng client e2e tests; fail build if needed      -->
     <!-- 6. Deploy (if all tests passed) to a running Tomcat   -->
     <!--    (for further (load/manual) testing or production)  -->
-        
+
     <!-- NOTE: all exports are done first at point 2 as that might help with splitting up these steps above   -->
     <!--       into multiple Jenkins jobs - using the artifacts produced by the first (export) job to be sure -->
     <!--       that we deploy what we tested, but still be able to monitor each job's progress separately     -->
@@ -50,7 +54,7 @@
                             run_and_move_mobile_exports_if_tests_passed,
                             run_e2e_tests,
                             deploy_solutions"/>
-    
+
     <target name="main_jsunit_tests" depends="clean_jsunit_exports, clean_jsunit_tests, export_smart_jsunit_solutions, run_smart_client_tests"/>
     <target name="main_jsunit_mobile_tests" depends="clean_jsunit_exports, clean_jsunit_tests, export_mobile_jsunit_solutions, run_and_move_mobile_exports_if_tests_passed"/>
     <target name="main_e2e_tests" depends="clean_e2e_test_results, clean_e2e_exports, export_ngclient_e2e_solutions, run_e2e_tests"/>
@@ -60,7 +64,7 @@
     <target name="export_mobile_jsunit_solutions" depends="process_export_params, get_equinox_jar, emcs_73, emcs_lower"/>
     <target name="export_ngclient_e2e_solutions" depends="process_export_params, get_equinox_jar, export_wars_for_e2e"/>
     <target name="export_deploy_solutions" depends="process_export_params, get_equinox_jar, export_wars_for_deploy"/>
-    
+
     <target name="process_export_params">
         <condition property="export.dash.pl.if_needed" value="-pl">
             <isset property="alternate_project_locations.on"/>
@@ -73,18 +77,18 @@
         <antcall target="run-smart-client-unit-tests" inheritRefs="true"/>
         <antcall target="move_smart_exports_if_tests_passed" inheritRefs="true"/>
     </target>
-    
+
     <target name="move_smart_exports_if_tests_passed" if="build.run.unit.tests">
         <!-- tests passed, move .servoy files to a "passed" directory for any further use -->
         <move todir="${passed.sc.exports.dir}">
             <fileset dir="${smart.test.exports.dir}" includes="**/*" />
         </move>
     </target>
-    
+
     <target name="run_mobile_client_tests_if_exported_ok" depends="prepare_jsunit_classpath" if="build.run.mobile.unit.tests">
         <antcall target="run-mobile-client-unit-tests" inheritRefs="true"/>
     </target>
-    
+
     <target name="run_and_move_mobile_exports_if_tests_passed" depends="run_mobile_client_tests_if_exported_ok" if="build.run.mobile.unit.tests">
         <!-- tests passed, deploy production mode mobile solution to a Servoy Application Server -->
         <!-- we need to export them again for production mode (not test mode) - to put them in the passed exports dir -->
@@ -92,7 +96,7 @@
         <antcall target="rmme_lower" inheritRefs="true"/>
         <antcall target="move_mobile_exports_if_exported_ok" inheritRefs="true"/>
     </target>
-    
+
     <target name="move_mobile_exports_if_exported_ok" unless="export.failed" if="build.run.mobile.unit.tests">
         <move todir="${passed.mc.exports.dir}">
             <fileset dir="${mobile.deploy.s.dir}" includes="**/*" />
@@ -106,5 +110,5 @@
             <fileset dir="${passed.mc.exports.dir}" includes="**/*.war" />
         </copy>
     </target>
-    
+
 </project>
