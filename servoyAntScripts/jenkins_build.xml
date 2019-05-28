@@ -9,10 +9,6 @@
       </classpath>
     </taskdef>
 
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-        <classpath path="./jacoco-0.8.4/lib/jacocoant.jar"/>
-    </taskdef>
-
     <import file="exporter.xml"/>
     <import file="unit_test_runner.xml"/>
     <import file="e2e_test_runner.xml"/>

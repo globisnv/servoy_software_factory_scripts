@@ -2,6 +2,9 @@
 
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="./jacoco-0.8.4/lib/jacocoant.jar"/>
+    </taskdef>
 
     <property file="local_ant_build.properties"/> <!-- this file is not available when running in Jenkins setup, only when running tests locally -->
     <property file="ant_build.properties"/>
