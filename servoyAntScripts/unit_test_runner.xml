@@ -30,10 +30,10 @@
         </executiondata>
         <structure name="Globis Online">
           <classfiles>
-              <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_solutions"/>
+              <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_solutions\jacoco"/>
           </classfiles>
           <sourcefiles encoding="UTF-8">
-              <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_solutions"/>
+              <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_solutions\jacoco"/>
           </sourcefiles>
         </structure>
         <html destdir="reports"/>
