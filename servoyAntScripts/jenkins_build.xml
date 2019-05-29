@@ -47,11 +47,12 @@
                             export_ngclient_e2e_solutions,
                             export_deploy_solutions,
                             run_smart_client_tests,
+                            jacoco_report,
                             run_and_move_mobile_exports_if_tests_passed,
                             run_e2e_tests,
                             deploy_solutions"/>
 
-    <target name="main_jsunit_tests" depends="clean_jsunit_exports, clean_jsunit_tests, export_smart_jsunit_solutions, run_smart_client_tests"/>
+    <target name="main_jsunit_tests" depends="clean_jsunit_exports, clean_jsunit_tests, export_smart_jsunit_solutions, run_smart_client_tests, jacoco_report"/>
     <target name="main_jsunit_mobile_tests" depends="clean_jsunit_exports, clean_jsunit_tests, export_mobile_jsunit_solutions, run_and_move_mobile_exports_if_tests_passed"/>
     <target name="main_e2e_tests" depends="clean_e2e_test_results, clean_e2e_exports, export_ngclient_e2e_solutions, run_e2e_tests"/>
     <target name="main_deploy" depends="clean_deploy_exports, export_deploy_solutions, deploy_solutions"/>
@@ -72,6 +73,10 @@
     <target name="run_smart_client_tests" depends="prepare_jsunit_classpath" if="build.run.unit.tests">
         <antcall target="run-smart-client-unit-tests" inheritRefs="true"/>
         <antcall target="move_smart_exports_if_tests_passed" inheritRefs="true"/>
+    </target>
+
+    <target name="jacoco_report">
+        <antcall target="jacoco-report" inheritRefs="true"/>
     </target>
 
     <target name="move_smart_exports_if_tests_passed" if="build.run.unit.tests">

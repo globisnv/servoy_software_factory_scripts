@@ -23,6 +23,15 @@
         <run-smart-client-tests/>
     </target>
 
+    <target name="jacoco-report">
+      <jacoco:report>
+        <executiondata>
+          <file file="jacoco.exec"/>
+        </executiondata>
+        <html destdir="reports"/>
+      </jacoco:report>
+    </target>
+
     <target name="run-mobile-client-unit-tests" if="build.run.mobile.unit.tests">
         <for list="${mobile_test_solutions}" param="solution">
           <sequential>
