@@ -33,7 +33,7 @@
               <fileset dir="./"/>
           </classfiles>
           <sourcefiles encoding="UTF-8">
-              <fileset dir="./"/>
+              <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_build_scripts\buildResults\passedExports\smart_client"/>
           </sourcefiles>
         </structure>
         <html destdir="reports"/>
