@@ -30,10 +30,10 @@
         </executiondata>
         <structure name="Example Project">
           <classfiles>
-              <fileset dir="classes"/>
+              <fileset dir="./"/>
           </classfiles>
           <sourcefiles encoding="UTF-8">
-              <fileset dir="src"/>
+              <fileset dir="./"/>
           </sourcefiles>
         </structure>
         <html destdir="reports"/>
