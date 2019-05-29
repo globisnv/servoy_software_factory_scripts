@@ -69,7 +69,7 @@
             <property name="absolute.jsunit.servoy.properties" location="${jsunit.servoy.properties}"/>
             <property name="absolute.smart.test.exports.dir" location="${smart.test.exports.dir}"/>
 
-            <jacoco:coverage append="false">
+            <jacoco:coverage append="false" includes="*js">
               <!-- Define a timeout so we know the test will finish eventually -->
               <junit fork="yes" forkmode="once" timeout="${unit.test.timeout}" dir="${servoy.app_server.dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
                   <jvmarg value="-XX:MaxPermSize=128m" />
