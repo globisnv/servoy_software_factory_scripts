@@ -30,7 +30,7 @@
         </executiondata>
         <structure name="Example Project">
           <classfiles>
-              <fileset dir="./"/>
+              <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_build_scripts\buildResults\passedExports\smart_client"/>
           </classfiles>
           <sourcefiles encoding="UTF-8">
               <fileset dir="C:\Program Files (x86)\Jenkins\workspace\GO10 Temp items\pja-test-jacoco\software_factory_build_scripts\buildResults\passedExports\smart_client"/>
