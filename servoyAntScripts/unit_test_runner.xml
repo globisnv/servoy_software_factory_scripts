@@ -50,6 +50,7 @@
             <property name="absolute.smart.test.exports.dir" location="${smart.test.exports.dir}"/>
 
             <!-- Define a timeout so we know the test will finish eventually -->
+            <limit minutes="90" >
             <junit fork="yes" forkmode="once" timeout="${unit.test.timeout}" dir="${servoy.app_server.dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
                 <classpath refid="classpath.run_test" />
 
@@ -68,6 +69,7 @@
 
                 <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${jsunit.results.dir}" />
             </junit>
+            </limit>
             
             <move file="${servoy.app_server.dir}/servoy_log.txt" tofile="${jsunit.logs.dir}/smart_import_test_client_log.txt" failonerror="false"/>
             <create_test_report/>
