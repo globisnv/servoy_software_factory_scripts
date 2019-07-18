@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration
+	debug="false" status="INFO">
+	<Appenders>
+		<Console name="stdout" target="SYSTEM_OUT">
+		    <!-- I want to just print the first line of stack traces to console output - when they are available; the rest will be available in the log file -->
+			<PatternLayout pattern="%d %p [%t] %c - %m%notEmpty{ [%X{clientid} %X{solution}]}%notEmpty{: (full stack is in log file)\n%ex{short}}%ex{none}%n%n" />
+		</Console>
+		
+	    <File name="file" fileName="servoy_log.txt">
+	      <PatternLayout>
+	        <Pattern>%d %p [%t] %c - %m%equals{ [%X{clientid} %X{solution}]}{ [ ]}{}%n</Pattern>
+	      </PatternLayout>
+	    </File>
+    
+		<Async name="asyncfile">
+			<AppenderRef ref="file" />
+		</Async>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.servoy.automation" level="INFO" />
+		<Logger name="com.servoy.j2db.util.Debug" level="WARN" />
+		<Logger name="com.servoy.j2db.dataprocessing.editedRecords"
+			level="WARN" />
+		<Logger name="com.servoy.j2db.server.persistence.Server"
+			level="WARN" />
+		<Logger
+			name="com.servoy.j2db.persistence.XMLInMemoryImportHandlerVersions11AndHigher"
+			level="WARN" />
+		<Logger name="com.servoy.j2db.persistence.XMLExporter"
+			level="WARN" />
+		<Logger name="com.servoy.j2db.server" level="WARN" />
+		<Logger name="com.servoy.j2db.server.main.WebServer"
+			level="WARN" />
+		<Logger name="com.servoy.j2db.datasource" level="WARN" />
+		<Logger name="com.servoy.j2db.datasource.ClientManager"
+			level="WARN" />
+		<Logger name="org.sablo" level="WARN" />
+		<Logger name="org.sablo.specification.property" level="WARN" />
+		<Logger name="org.sablo.websocket" level="WARN" />
+		<Logger name="com.servoy.j2db.server.ngclient.property.types"
+			level="WARN" />
+		<Logger name="org.apache.wicket" level="WARN" />
+		<Logger
+			name="org.apache.wicket.request.target.component.listener.BehaviorRequestTarget"
+			level="ERROR" />
+		<Root level="WARN">
+			<AppenderRef ref="asyncfile" />
+			<AppenderRef ref="stdout" level="ERROR"/>
+		</Root>
+	</Loggers>
+</Configuration>			
