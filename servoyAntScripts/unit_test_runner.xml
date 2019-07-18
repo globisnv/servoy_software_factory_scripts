@@ -5,6 +5,7 @@
 
     <property file="local_ant_build.properties"/> <!-- this file is not available when running in Jenkins setup, only when running tests locally -->
     <property file="ant_build.properties"/>
+    <property name="absolute_log4j_xml_file" location="log4j.xml"/>
 
     <import file="utils.xml"/>
 
@@ -50,11 +51,11 @@
 
             <!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${unit.test.timeout}" dir="${servoy.app_server.dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
-                <jvmarg value="-XX:MaxPermSize=128m" />
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${absolute.smart.test.exports.dir}" />
                 <sysproperty key="servoy.test.property-file" value="${absolute.jsunit.servoy.properties}" />
+                <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
                 <!-- <sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
                 <formatter type="brief" usefile="false" />
