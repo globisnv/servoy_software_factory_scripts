@@ -18,6 +18,7 @@
 		</Async>
 	</Appenders>
 	<Loggers>
+		<Logger name="Log.Globis" level="DEBUG" />
 		<Logger name="com.servoy.automation" level="INFO" />
 		<Logger name="com.servoy.j2db.util.Debug" level="WARN" />
 		<Logger name="com.servoy.j2db.dataprocessing.editedRecords"
