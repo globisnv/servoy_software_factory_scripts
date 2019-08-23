@@ -12,15 +12,47 @@
 	        <Pattern>%d %p [%t] %c - %m%equals{ [%X{clientid} %X{solution}]}{ [ ]}{}%n</Pattern>
 	      </PatternLayout>
 	    </File>
+		
+		<Async name="async_globis_health_monitor_file">
+			<AppenderRef ref="globis_health_monitor_file" />
+		</Async>
+		
+		<!-- GLOBIS HEALTH MONITOR LOGGER -->
+		
+		<RollingFile name="globis_health_monitor_file"
+			fileName="C:/GLOBIS_UPLOAD_LOCATION/jenkins/globislogs/health_monitor_unit_tests/health_monitor_unit_tests.txt"
+			filePattern="C:/GLOBIS_UPLOAD_LOCATION/jenkins/globislogs/health_monitor_unit_tests/globis_health_monitor-%i.txt.zip"
+			immediateFlush="true" append="true">
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+				<DefaultRolloverStrategy max="2"/>
+			</Policies>
+			<PatternLayout
+				pattern="{ &quot;ghm_time&quot;: &quot;%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}&quot;, &quot;level&quot;: &quot;%p&quot;, &quot;instance&quot;: &quot;%c&quot; }%throwable{none}%n" />
+		</RollingFile>
     
 		<Async name="asyncfile">
 			<AppenderRef ref="file" />
 		</Async>
+		
 	</Appenders>
 	<Loggers>
-		<Logger name="Log.Globis" level="DEBUG" />
+		<!-- GLOBIS LOGGERS -->
+		<Logger name="Log.Globis" level="DEBUG" >
+			<!-- 
+				always leave Logger name="Log.Globis" on level="DEBUG"
+				always leave AppenderRef ref="async_globis_health_monitor_file" on level="INFO"
+				modify 		 AppenderRef ref="async_servoy_file" level to the desired log level,
+							 fe DEBUG for test purposes and WARN for production
+			-->
+			<AppenderRef ref="asyncfile" level="DEBUG" />
+			<AppenderRef ref="async_globis_health_monitor_file" level="INFO" />
+		</Logger>
+		<!-- SERVOY LOGGERS -->
+		<Logger name="com.servoy.j2db.util.Debug" level="WARN" >
+			<AppenderRef ref="async_globis_health_monitor_file" level="WARN" />
+		</Logger>
 		<Logger name="com.servoy.automation" level="INFO" />
-		<Logger name="com.servoy.j2db.util.Debug" level="WARN" />
 		<Logger name="com.servoy.j2db.dataprocessing.editedRecords"
 			level="WARN" />
 		<Logger name="com.servoy.j2db.server.persistence.Server"
@@ -50,4 +82,4 @@
 			<AppenderRef ref="stdout" level="ERROR"/>
 		</Root>
 	</Loggers>
-</Configuration>			
+</Configuration>
