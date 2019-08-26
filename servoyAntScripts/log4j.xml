@@ -20,7 +20,7 @@
 		<!-- GLOBIS HEALTH MONITOR LOGGER -->
 		
 		<RollingFile name="globis_health_monitor_file"
-			fileName="C:/GLOBIS_UPLOAD_LOCATION/jenkins/globislogs/health_monitor_unit_tests/health_monitor_unit_tests.txt"
+			fileName="C:/GLOBIS_UPLOAD_LOCATION/jenkins/globislogs/health_monitor_unit_tests/globis_health_monitor.txt"
 			filePattern="C:/GLOBIS_UPLOAD_LOCATION/jenkins/globislogs/health_monitor_unit_tests/globis_health_monitor-%i.txt.zip"
 			immediateFlush="true" append="true">
 			<Policies>
