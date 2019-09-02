@@ -19,12 +19,12 @@
     <target name="run-smart-client-unit-tests" if="build.run.unit.tests">
         <run-smart-client-tests/>
     </target>
-    
+
     <target name="run-mobile-client-unit-tests" if="build.run.mobile.unit.tests">
         <for list="${mobile_test_solutions}" param="solution">
           <sequential>
             <run-mobile-client-tests solutionName="@{solution}" driverType="localhost_chrome"/>
-              
+
               <!-- here is an example of how you could use sauce labs for testing mobile client in the cloud -->
               <!-- the local server URL (that has the test app. prepared) could be accessed as simulated local URL via SauceLabs "Sauce Connect" proxy from the cloud test server (browser) -->
               <!--
@@ -43,7 +43,7 @@
             <echo level="verbose">
                 *** Servoy Solution JS unit (smart) client tests ***
             </echo>
-            
+
             <var name="absolute.jsunit.servoy.properties" unset="true"/>
             <var name="absolute.smart.test.exports.dir" unset="true"/>
             <property name="absolute.jsunit.servoy.properties" location="${jsunit.servoy.properties}"/>
@@ -52,6 +52,7 @@
             <!-- Define a timeout so we know the test will finish eventually -->
             <limit minutes="90" >
             <junit fork="yes" forkmode="once" timeout="${unit.test.timeout}" dir="${servoy.app_server.dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
+                <jvmarg value="-Xmx4g" />
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${absolute.smart.test.exports.dir}" />
@@ -69,15 +70,14 @@
 
                 <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${jsunit.results.dir}" />
             </junit>
-            </limit>
-            
+
             <move file="${servoy.app_server.dir}/servoy_log.txt" tofile="${jsunit.logs.dir}/smart_import_test_client_log.txt" failonerror="false"/>
             <create_test_report/>
             
             <fail-if-unittests-failed/>
         </sequential>
     </macrodef>
-    
+
     <macrodef name="run-mobile-client-tests">
         <attribute name="solutionName"/>
         <attribute name="driverType"/>
@@ -85,7 +85,7 @@
             <echo level="verbose">
                 *** Servoy Solution JS unit mobile client tests ***
             </echo>
-            
+
             <path id="classpath.run_mobile_test">
                 <path refid="classpath.run_test"/>
                 <fileset file="${selenium.server.jar}"/>
@@ -125,7 +125,7 @@
             <fail-if-unittests-failed/>
         </sequential>
     </macrodef>
-            
+
     <macrodef name="fail-if-unittests-failed">
         <sequential>
             <fail message="Unit tests failed: please check test reports." if="test.failed" />
@@ -146,7 +146,7 @@
             </junitreport>
         </sequential>
     </macrodef>
-        
+
     <target name="prepare_jsunit_classpath" if="build.run.any.unit.tests">
         <mkdir dir="${lib.dir}"/>
 
