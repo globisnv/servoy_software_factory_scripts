@@ -70,7 +70,7 @@
 
                 <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${jsunit.results.dir}" />
             </junit>
-
+            </limit>
             <move file="${servoy.app_server.dir}/servoy_log.txt" tofile="${jsunit.logs.dir}/smart_import_test_client_log.txt" failonerror="false"/>
             <create_test_report/>
             
