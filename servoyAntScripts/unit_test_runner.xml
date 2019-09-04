@@ -5,7 +5,7 @@
 
     <property file="local_ant_build.properties"/> <!-- this file is not available when running in Jenkins setup, only when running tests locally -->
     <property file="ant_build.properties"/>
-    <property name="absolute_log4j_xml_file" location="log4j.xml"/>
+	<property name="absolute_log4j_xml_file" location="log4j.xml"/>
 
     <import file="utils.xml"/>
 
@@ -100,7 +100,6 @@
 
             <!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${unit.test.timeout}" dir="${servoy.app_server.dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
-                <jvmarg value="-XX:MaxPermSize=128m" />
                 <classpath refid="classpath.run_mobile_test" />
 
                 <sysproperty key="servoy.test.target" value="${absolute.servoy.test.target}" />
@@ -108,6 +107,7 @@
                 <sysproperty key="servoy.test.targetServiceSolution" value="${absolute.servoy.test.targetServiceSolution}" />
                 <sysproperty key="servoy.test.seleniumDriver" value="@{driverType}" />
                 <sysproperty key="webdriver.chrome.driver" value="${webdriver.chrome.driver}"/>
+                <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
 
                 <formatter type="brief" usefile="false" />
                 <formatter type="xml" />

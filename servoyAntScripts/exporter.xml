@@ -9,7 +9,7 @@
     <import file="utils.xml"/>
 
     <target name="export_wars_for_e2e" depends="clean_e2e_exports" if="build.run.e2e.tests">
-        <export-solutions-as-war solutionNames="${ngclient_e2e_test_solutions}" outputDir="${e2e.export.dir}" propertiesFileForWar="e2e.servoy.properties" failOnError="false"/>
+        <export-solutions-as-war solutionNames="${ngclient_e2e_test_solutions}" outputDir="${e2e.export.dir}" propertiesFileForWar="${e2e.servoy.properties}" failOnError="false"/>
         <prepare_export_logs destSubdir="e2e"/>
         <fail-if-export-failed/>
     </target>
@@ -18,7 +18,7 @@
         <trycatch>
             <try>
                 <!-- we need to export this with a deployment properties file as well (which probably doesn't have the ngclient e2e test mode property enabled) -->
-                <export-solutions-as-war solutionNames="${solutions_to_deploy}" outputDir="${deploy.export.dir}" propertiesFileForWar="deploy.servoy.properties"/>
+                <export-solutions-as-war solutionNames="${solutions_to_deploy}" outputDir="${deploy.export.dir}" propertiesFileForWar="${deploy.servoy.properties}"/>
             </try>
             <finally>
                 <prepare_export_logs destSubdir="deploy"/>
@@ -189,7 +189,6 @@
                     fork="true">
                 <jvmarg value="-Xms40m" />
                 <jvmarg value="-Xmx512m" />
-                <jvmarg value="-XX:MaxPermSize=256M" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
 
                 <arg value="-application" />
@@ -242,7 +241,6 @@
                     fork="true">
                 <jvmarg value="-Xms40m" />
                 <jvmarg value="-Xmx512m" />
-                <jvmarg value="-XX:MaxPermSize=256M" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
                 <jvmarg value="-Dservoy.application_server.dir=${servoy.app_server.dir}" />
                 <!--jvmarg value="-Xdebug" />
@@ -267,7 +265,11 @@
                 <arg value="-i18n" />
                 <arg value="-pfw" /> <!-- SVY-9645 is to implement this -pfw option; until then the -p will be put in the war as well -->
                 <arg value="@{propertiesFileForWar}" />
-
+                <arg value="-defaultAdminUser" />
+                <arg value="admin" />
+                <arg value="-defaultAdminPassword" />
+                <arg value="admin" />
+                
                 <!-- add here any of the optional arguments supported by the exporter; see 'export -help' for more info; for example: -->
                 <!--<arg value="-help" />-->
                 <arg value="-verbose" />

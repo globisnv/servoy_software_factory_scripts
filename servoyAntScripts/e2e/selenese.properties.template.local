@@ -1,0 +1,6 @@
+# configuration file format.
+driver: chrome
+chromedriver: node_modules/chromedriver/lib/chromedriver/chromedriver.exe
+set-speed: 3000
+xml-result: @{e2e.results.dir}@
+baseurl: @{e2e.tomcat.base.url}@

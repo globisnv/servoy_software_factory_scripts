@@ -20,20 +20,24 @@
             <path location="${e2e.scripts.dir}"/>
         </pathconvert>
         
-        <copy file="${e2e.testing.dir}/protractor.config.js.template" toFile="${e2e.testing.dir}/protractor.config.js" overwrite="true">
+        <copy file="${e2e.testing.dir}/package.json.${e2e.browser.type}" toFile="${e2e.testing.dir}/package.json" overwrite="true"></copy>
+
+    	<copy file="${e2e.testing.dir}/protractor.config.js.template.${e2e.browser.type}" toFile="${e2e.testing.dir}/protractor.config.js" overwrite="true">
             <filterset>
                 <filter token="{sauceUserPlaceholder}"                   value="${sauce.labs.user}"/>
                 <filter token="{sauceKeyPlaceholder}"                    value="${sauce.labs.token}"/>
+                <filter token="{sauceRegionPlaceholder}"                 value="${sauce.labs.region}"/>
                 <filter token="{e2e.results.dir}"                        value="${absolute.path.e2e.results.dir}"/>
                 <filter token="{e2e.protractor.tests.dir}"               value="${absolute.path.e2e.scripts.dir}"/>
                 <filter token="{e2e.tomcat.base.url}"                    value="${e2e.tomcat.base.url}"/>
             </filterset>
         </copy>
         
-        <copy file="${e2e.testing.dir}/selenese.properties.template" toFile="${e2e.testing.dir}/selenese.properties" overwrite="true">
+        <copy file="${e2e.testing.dir}/selenese.properties.template.${e2e.browser.type}" toFile="${e2e.testing.dir}/selenese.properties" overwrite="true">
             <filterset>
                 <filter token="{sauceUserPlaceholder}"                   value="${sauce.labs.user}"/>
                 <filter token="{sauceKeyPlaceholder}"                    value="${sauce.labs.token}"/>
+                <filter token="{sauceProxiedSeleniumPort}"               value="${SELENIUM_PORT}"/>
                 <filter token="{e2e.results.dir}"                        value="${absolute.path.e2e.results.dir}"/>
                 <filter token="{e2e.tomcat.base.url}"                    value="${e2e.tomcat.base.url}"/>
             </filterset>
@@ -42,7 +46,7 @@
         <trycatch>
             <try>
                 <echo level="info" message="Trying to stop any previously started tomcat that was left behind unintentionally (if any)."/>
-                <antcall target="e2e-tomcat-stop"/>
+                <antcall target="e2e-tomcat-stop-silently"/>
 
                 <antcall target="e2e-tomcat-start"/>
                 <for list="${ngclient_e2e_test_solutions}" param="solution.name">
@@ -55,9 +59,10 @@
                                 <deploy update="true" url="${e2e.tomcat.manager.url}" username="${e2e.tomcat.username}" password="${e2e.tomcat.password}"
                                     path="/@{solution.name}" localWar="${absolute.path.e2e.export.dir}/@{solution.name}.war"/>
 
-                                <echo level="info" message="Deployment done. Waiting a bit (10 sec) for things to be stable..."/>
+                                <echo level="info" message="Deployment done."/><!-- Waiting a bit (10 sec) for things to be stable..."/><-->
                                 <!-- shouldn't the deploy task wait itself until it is ready to use?! I guess it doesn't wait enough... -->
-                                <sleep seconds="10"/>
+                            	<!--<sleep seconds="10"/>-->
+                            	<sleep seconds="1"/>
                                 
                                 <echo level="info" message="Running e2e tests for this solution..."/>
                                 <echotimestamp />
@@ -111,9 +116,10 @@
                                             <mapper type="glob" from="TEST-*.xml" to="selenese_*_@{solution.name}.xml"/>
                                         </move>
 
-                                        <echo level="info" message="Sleeping for 10 more seconds to fix another problem that sometimes appeared with deploy/undeploy..."/>
-                                        <sleep seconds="10"/>
+                                        <!--<echo level="info" message="Sleeping for 10 more seconds to fix another problem that sometimes appeared with deploy/undeploy..."/>-->
+                                        <!--<sleep seconds="10"/>-->
                                         <!-- trying to fix a following deploy failing for last solution (no solution available for 90 sec followed by timeout and the following error when trying to undeploy:  "[undeploy] FAIL - The application [/test_xyz] is already being serviced") -->
+                                    	<sleep seconds="1"/>
                                     </finally>
                                 </trycatch>
                             </finally>
@@ -135,6 +141,10 @@
 
     <target name="e2e-tomcat-stop" if="e2e.tomcat.start_stop.tools.tomcat">
         <tomcat-stop tomcatDir="${e2e.tomcat.dir}"/>
+    </target>
+
+    <target name="e2e-tomcat-stop-silently" if="e2e.tomcat.start_stop.tools.tomcat">
+        <tomcat-stop tomcatDir="${e2e.tomcat.dir}" logErrorProp="ignore.me"/>
     </target>
 
     <target name="clean_e2e_test_results" if="build.run.e2e.tests">
