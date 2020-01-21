@@ -154,6 +154,8 @@
                 <arg value="-pl" />
                 <arg value="-p" />
                 <arg value="${export.servoy.properties}" />
+                <!-- Skip Build-->
+                <arg value="-sb" />
 
                 <!-- add here any of the optional arguments supported by the exporter; see 'export -help' for more info; for example: -->
                 <!--arg value="-help" /-->
