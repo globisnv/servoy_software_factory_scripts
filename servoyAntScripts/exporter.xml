@@ -152,6 +152,7 @@
                 <arg value="-as" />
                 <arg value="${servoy.app_server.dir}" />
                 <arg value="-pl" />
+                <arg value="-sb" />
                 <arg value="-p" />
                 <arg value="${export.servoy.properties}" />
 
