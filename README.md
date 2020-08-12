@@ -1,6 +1,6 @@
 # Build scripts for building a Servoy Software Factory
 
-This repository contains the build scripts that are needed for building a Servoy based Software Factory:   https://wiki.servoy.com/display/public/DOCS/Building+a+Software+Factory  
+This repository contains the build scripts that are needed for building a Servoy based Software Factory:   https://wiki.servoy.com/display/DOCS/Building+a+Software+Factory  
 Please read that wiki page for instructions on how to use the contents of this repository.
 
 You should be able to use these scripts with your own solutions to set up automatic unit testing, e2e testing and manual upload steps (for solution builds that have passed the tests).
