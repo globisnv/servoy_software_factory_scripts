@@ -177,6 +177,7 @@
             <fileset file="${cse.exporter.mobile.location_property}"/>
             <fileset dir="${servoy.developer.dir}/plugins">
                 <include name="org.junit*4*/junit*.jar"/>
+                <include name="org.junit_*4*.jar"/>
             </fileset>
         </path>
     </target>
