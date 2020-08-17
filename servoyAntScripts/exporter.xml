@@ -63,7 +63,7 @@
             <isset property="build.run.mobile.unit.tests"/>
             <then>
                 <export-solution-as-dot-servoy solutionNames="${mobile_service_solutions}" outputDir="${mobile.service.export.dir}" failOnError="false"/>
-                <export-mobile-solution solutionNames="${mobile_test_solutions}" production="" outputDir="${mobile.test.war.dir}" failOnError="false"/> <!-- "" means export for unit tests -->
+                <export-mobile-solution solutionNames="${mobile_test_solutions}" production="" longTestNames="-long_test_names" outputDir="${mobile.test.war.dir}" failOnError="false"/> <!-- "" means export for unit tests -->
                 <prepare_export_logs destSubdir="unit_mobile"/>
                 <fail-if-export-failed/>
             </then>
@@ -177,6 +177,7 @@
         <attribute name="failOnError" default="true"/>
         <attribute name="outputDir" default="${mobile.test.war.dir}"/>
         <attribute name="production" default=""/>
+        <attribute name="longTestNames" default=""/>
         <sequential>
             <!-- now we are ready to start the workspace exporter -->
             <echo level="info" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
@@ -209,6 +210,7 @@
                 <!--arg value="-help" /-->
                 <arg value="-verbose" />
                 <arg value="@{production}" /> <!-- can be "" for test-client export -->
+                <arg value="@{longTestNames}" /> <!-- can be "" -->
                 <arg value="-server_url" />
                 <arg value="${servoy.install.url}" />
             </java>
