@@ -108,6 +108,7 @@
                 <sysproperty key="servoy.test.seleniumDriver" value="@{driverType}" />
                 <sysproperty key="webdriver.chrome.driver" value="${webdriver.chrome.driver}"/>
                 <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
+                <sysproperty key="servoy.test.long-test-method-names" value="true" />
 
                 <formatter type="brief" usefile="false" />
                 <formatter type="xml" />
@@ -179,7 +180,8 @@
             <fileset file="${servoy_debug.jar.location_property}"/>
             <fileset file="${cse.exporter.mobile.location_property}"/>
             <fileset dir="${servoy.developer.dir}/plugins">
-                <include name="org.junit*4*/junit*.jar"/>
+                <include name="org.junit*4*/junit*.jar"/> <!-- for older developer plugin file structure -->
+                <include name="org.junit_*4*.jar"/>       <!-- for newer developers -->
             </fileset>
         </path>
     </target>
