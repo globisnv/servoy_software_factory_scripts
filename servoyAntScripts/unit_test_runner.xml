@@ -85,6 +85,7 @@
             
             <path id="classpath.run_mobile_test">
                 <path refid="classpath.run_test"/>
+                <path refid="classpath.extra.for_mobile_tests"/>
                 <fileset file="${selenium.server.jar}"/>
             </path>
 
@@ -179,6 +180,11 @@
             <fileset dir="${servoy.developer.dir}/plugins">
                 <include name="org.junit*4*/junit*.jar"/> <!-- for older developer plugin file structure -->
                 <include name="org.junit_*4*.jar"/>       <!-- for newer developers -->
+            </fileset>
+        </path>
+        <path id="classpath.extra.for_mobile_tests">
+            <fileset dir="${servoy.developer.dir}/plugins">
+                <include name="sablo_*.jar"/>       <!-- we use bundled tomcat and that one needs sablo access for a filter SeparateSessionFilter -->
             </fileset>
         </path>
     </target>
