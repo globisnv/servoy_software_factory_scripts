@@ -56,6 +56,7 @@
                 <sysproperty key="servoy.test.target-exports" value="${absolute.smart.test.exports.dir}" />
                 <sysproperty key="servoy.test.property-file" value="${absolute.jsunit.servoy.properties}" />
                 <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
+                <sysproperty key="servoy.test.long-test-method-names" value="true"/>
                 <!-- <sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
                 <formatter type="brief" usefile="false" />
@@ -106,7 +107,6 @@
                 <sysproperty key="servoy.test.seleniumDriver" value="@{driverType}" />
                 <sysproperty key="webdriver.chrome.driver" value="${webdriver.chrome.driver}"/>
                 <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
-                <sysproperty key="servoy.test.long-test-method-names" value="true" />
 
                 <formatter type="brief" usefile="false" />
                 <formatter type="xml" />
