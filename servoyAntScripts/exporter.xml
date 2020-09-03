@@ -167,7 +167,6 @@
                 <arg value="-users" />
                 <arg value="-tables" />
                 <arg value="-modules" />
-                <arg value="-ie" />
             </java>
             <check-exporter-exit-code/>
         </sequential>
