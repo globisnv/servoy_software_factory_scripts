@@ -58,6 +58,7 @@
                 <sysproperty key="servoy.test.target-exports" value="${absolute.smart.test.exports.dir}" />
                 <sysproperty key="servoy.test.property-file" value="${absolute.jsunit.servoy.properties}" />
                 <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
+                <sysproperty key="servoy.test.long-test-method-names" value="true"/>
                 <!-- <sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
                 <formatter type="brief" usefile="false" />
@@ -88,6 +89,7 @@
 
             <path id="classpath.run_mobile_test">
                 <path refid="classpath.run_test"/>
+                <path refid="classpath.extra.for_mobile_tests"/>
                 <fileset file="${selenium.server.jar}"/>
             </path>
 
@@ -108,7 +110,6 @@
                 <sysproperty key="servoy.test.seleniumDriver" value="@{driverType}" />
                 <sysproperty key="webdriver.chrome.driver" value="${webdriver.chrome.driver}"/>
                 <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
-                <sysproperty key="servoy.test.long-test-method-names" value="true" />
 
                 <formatter type="brief" usefile="false" />
                 <formatter type="xml" />
@@ -182,6 +183,11 @@
             <fileset dir="${servoy.developer.dir}/plugins">
                 <include name="org.junit*4*/junit*.jar"/> <!-- for older developer plugin file structure -->
                 <include name="org.junit_*4*.jar"/>       <!-- for newer developers -->
+            </fileset>
+        </path>
+        <path id="classpath.extra.for_mobile_tests">
+            <fileset dir="${servoy.developer.dir}/plugins">
+                <include name="sablo_*.jar"/>       <!-- we use bundled tomcat and that one needs sablo access for a filter SeparateSessionFilter -->
             </fileset>
         </path>
     </target>
