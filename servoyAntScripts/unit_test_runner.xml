@@ -180,6 +180,8 @@
             <fileset dir="${servoy.developer.dir}/plugins">
                 <include name="org.junit*4*/junit*.jar"/> <!-- for older developer plugin file structure -->
                 <include name="org.junit_*4*.jar"/>       <!-- for newer developers -->
+            	<include name="servoy_ngclient_*.jar"/>
+            	<include name="sablo_*.jar"/>
             </fileset>
         </path>
         <path id="classpath.extra.for_mobile_tests">
