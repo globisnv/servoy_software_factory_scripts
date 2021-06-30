@@ -59,6 +59,7 @@
                 <sysproperty key="servoy.test.property-file" value="${absolute.jsunit.servoy.properties}" />
                 <sysproperty key="log4j.configurationFile" value="${absolute_log4j_xml_file}" />
                 <sysproperty key="servoy.test.long-test-method-names" value="true"/>
+                <sysproperty key="java.awt.headless" value="true"/>
                 <!-- <sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
                 <formatter type="brief" usefile="false" />
