@@ -173,6 +173,9 @@
                 <include name="*.jar" />
                 <exclude name="slf4j-jdk14.jar"/>
             </fileset>
+            <fileset dir="${servoy.app_server.dir}/server/lib">
+                <include name="servlet-api.jar" />
+            </fileset>
             <fileset dir="${lib.dir}">
                 <include name="*.jar" />
             </fileset>
