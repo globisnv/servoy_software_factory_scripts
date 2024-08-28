@@ -184,10 +184,27 @@
             <fileset file="${servoy_debug.jar.location_property}"/>
             <fileset file="${cse.exporter.mobile.location_property}"/>
             <fileset dir="${servoy.developer.dir}/plugins">
-                <include name="org.junit*4*/junit*.jar"/> <!-- for older developer plugin file structure -->
-                <include name="org.junit_*4*.jar"/>       <!-- for newer developers -->
             	<include name="servoy_ngclient_*.jar"/>
             	<include name="sablo_*.jar"/>
+                <include name="org.junit_*4*.jar"/>
+                <include name="org.apache.logging.log4j.*.jar"/>
+                <include name="slf4j.api_*.jar"/>
+                <include name="servoy_shared_*.jar" />
+                <include name="servoy_base_*.jar" />
+                <include name="servoy_smart_client_*.jar" />
+                <include name="org.eclipse.dltk.javascript.rhino_*.jar" />
+                <include name="servoy_headless_client_*.jar" />
+                <include name="j2db_server_*.jar" />
+                <include name="jabsorb_*.jar" />
+                <include name="org.apache.commons.commons-*.jar" />
+                <include name="org.apache.commons.logging_*.jar" />
+                <include name="org.hibernate.orm.core_*.jar" />
+                <include name="javax.persistence-api_*.jar" />
+                <include name="org.jboss.logging.jboss-logging*.jar" />
+                <include name="javax.transaction_*.jar" />
+                <include name="com.sun.mail.jakarta.mail_*.jar" />
+                <include name="com.sun.activation.jakarta.activation_*.jar" />
+                <include name="com.google.guava_*.jar" />
             </fileset>
         </path>
         <path id="classpath.extra.for_mobile_tests">
